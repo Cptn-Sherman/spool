@@ -57,10 +57,12 @@ public class Spool {
 		return false;
 	}
 	
+	// returns the content out queue
 	public static Queue<IMultithreadProcess> getContentQueue() {
 		return contentQueue;
 	}
 	
+	// returns the data return queue
 	public static  Queue<IData> getDataQueue() {
 		return dataQueue;
 	}
