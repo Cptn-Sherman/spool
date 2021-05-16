@@ -10,6 +10,16 @@ public class Spool {
 	protected volatile static Queue<IData> dataQueue;
 	
 	
+	// Initializer will auto detect the number of supported threads.
+	public static void init() {
+		// get the supported thread pool count.
+		int threadCount = Runtime.getRuntime().availableProcessors() - 1;
+		// set the minimum thread count just in case.
+		if (threadCount < 1)
+			threadCount = 1;
+		Spool.init(threadCount);
+	}
+	
 	public static void init (int thread_count) {
 		threadCount = thread_count;
 		contentThreadPool = new AssetThread[threadCount];
