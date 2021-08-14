@@ -11,7 +11,7 @@ public class AssetThread extends Thread {
 
     @Override
     public void run() {
-        System.out.println("[content|thread]: starting thread: ["+ id +"]...");
+        System.out.println("[asset|thread]: starting thread: ["+ id +"]...");
 
         while(running) {
             try {
