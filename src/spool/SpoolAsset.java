@@ -1,13 +1,13 @@
 package spool;
 
-public abstract class Asset {
+public abstract class SpoolAsset {
 	private long assetID;
 	private boolean referenceCounted;
 	private int references;
 	protected boolean isReady;
 	protected String filename;
 	
-	public Asset(boolean referenceCounted) {
+	public SpoolAsset(boolean referenceCounted) {
 		this.referenceCounted = referenceCounted;
 		references = 0;
 	}
