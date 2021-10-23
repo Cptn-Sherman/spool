@@ -9,7 +9,6 @@ public class Spool {
 	protected volatile static Queue<IMultithreadProcess> contentQueue;
 	protected volatile static Queue<IData> dataQueue;
 	
-	
 	// Initializer will auto detect the number of supported threads.
 	public static void init() {
 		// get the supported thread pool count.

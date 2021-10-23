@@ -12,12 +12,11 @@ public abstract class SpoolAsset {
 		references = 0;
 	}
 	
-	
 	public boolean isReferencedCounted() {
 		return referenceCounted;
 	}
 	
-	public int referenceCount() {
+	public int getReferenceCount() {
 		return references;
 	}
 	
@@ -46,8 +45,4 @@ public abstract class SpoolAsset {
 	public void setReady(boolean ready) {
 		this.isReady = ready;
 	}
-
-
-	
-
 }
