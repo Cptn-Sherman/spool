@@ -1,1 +1,9 @@
 bin\**
+bin/spool/AssetThread.class
+bin/spool/IData.class
+bin/spool/IInstantLoad.class
+bin/spool/IJsonSource.class
+bin/spool/IMultithreadLoad.class
+bin/spool/IMultithreadProcess.class
+bin/spool/Spool.class
+bin/spool/SpoolAsset.class
