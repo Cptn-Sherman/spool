@@ -1,1 +1,2 @@
-bin/spool/**
+.gitignore
+bin\spool\*
