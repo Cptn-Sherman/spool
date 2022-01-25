@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Spool {
 	private static int threadCount = 0;
-	private static AssetThread[] contentThreadPool;
+	private static SpoolThread[] contentThreadPool;
 	protected volatile static Queue<IMultithreadProcess> contentQueue;
 	protected volatile static Queue<IData> dataQueue;
 	
@@ -21,14 +21,14 @@ public class Spool {
 	
 	public static void init (int thread_count) {
 		threadCount = thread_count;
-		contentThreadPool = new AssetThread[threadCount];
+		contentThreadPool = new SpoolThread[threadCount];
 		// content loading queue and data processing queue.
 		contentQueue = new ConcurrentLinkedQueue<IMultithreadProcess>();
 		dataQueue = new ConcurrentLinkedQueue<IData>();
 
 		// start up the thread pool, call start for each thread.
 		for (int i = 0; i < threadCount; i++) {
-			contentThreadPool[i] = new AssetThread(i);
+			contentThreadPool[i] = new SpoolThread(i);
 			contentThreadPool[i].start();
 		}
 	}
@@ -79,7 +79,7 @@ public class Spool {
 	// sets all the signals running flag to false and notifies them to wake up.
 	private static void signalThreadPoolToStop() {
 		// shut down all the loader threads.
-		for (AssetThread thread : contentThreadPool) {
+		for (SpoolThread thread : contentThreadPool) {
 			thread.running = false;
 		}
 		// notify all the threads that are stuck waiting on new content.
