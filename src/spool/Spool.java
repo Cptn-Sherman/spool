@@ -1,21 +1,17 @@
 package spool;
 
-import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Spool {
 	private static int threadCount = 0;
 	private static SpoolThread[] contentThreadPool;
-	protected volatile static Queue<IMultithreadProcess> contentQueue;
-	protected volatile static Queue<IData> dataQueue;
+	protected volatile static ConcurrentLinkedQueue<IMultithreadProcess> contentQueue;
+	protected volatile static ConcurrentLinkedQueue<IData> dataQueue;
 	
 	// Initializer will auto detect the number of supported threads.
 	public static void initialize() {
-		// get the supported thread pool count.
-		int threadCount = Runtime.getRuntime().availableProcessors() - 1;
-		// set the minimum thread count just in case.
-		if (threadCount < 1)
-			threadCount = 1;
+		// get the supported thread pool count or set to one as a minimum, whichever is higher.
+		threadCount = Math.max(Runtime.getRuntime().availableProcessors() - 1, 1);
 		Spool.initialize(threadCount);
 	}
 	
@@ -25,7 +21,6 @@ public class Spool {
 		// content loading queue and data processing queue.
 		contentQueue = new ConcurrentLinkedQueue<IMultithreadProcess>();
 		dataQueue = new ConcurrentLinkedQueue<IData>();
-
 		// start up the thread pool, call start for each thread.
 		for (int i = 0; i < threadCount; i++) {
 			contentThreadPool[i] = new SpoolThread(i);
@@ -67,12 +62,12 @@ public class Spool {
 	}
 	
 	// returns the content out queue
-	public static Queue<IMultithreadProcess> getContentQueue() {
+	public static ConcurrentLinkedQueue<IMultithreadProcess> getContentQueue() {
 		return contentQueue;
 	}
 	
 	// returns the data return queue
-	public static  Queue<IData> getDataQueue() {
+	public static  ConcurrentLinkedQueue<IData> getDataQueue() {
 		return dataQueue;
 	}
 	
