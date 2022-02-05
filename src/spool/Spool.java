@@ -45,8 +45,8 @@ public class Spool {
 		}
 	}
 	
-	public static  void stop() {
-		System.out.println("[spool]: shutting down threads...");
+	public static  void stopThreads() {
+		System.out.println("[spool]: shutting down " + contentThreadPool.length + " threads...");
 		signalThreadPoolToStop();
 	}
 	
